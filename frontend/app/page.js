@@ -27,6 +27,41 @@ export default function HomePage() {
           </div>
         </div>
 
+        <div className={styles.popularPoems}>
+          <h3 className={styles.sectionTitle}>热门诗词</h3>
+          <div className={styles.poemList}>
+            <div className={styles.poemCard}>
+              <h4>《静夜思》</h4>
+              <p>床前明月光，疑是地上霜。</p>
+              <p>举头望明月，低头思故乡。</p>
+            </div>
+            <div className={styles.poemCard}>
+              <h4>《登鹳雀楼》</h4>
+              <p>白日依山尽，黄河入海流。</p>
+              <p>欲穷千里目，更上一层楼。</p>
+            </div>
+            <div className={styles.poemCard}>
+              <h4>《春晓》</h4>
+              <p>春眠不觉晓，处处闻啼鸟。</p>
+              <p>夜来风雨声，花落知多少。</p>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.updates}>
+          <h3 className={styles.sectionTitle}>平台动态</h3>
+          <div className={styles.updateList}>
+            <div className={styles.updateCard}>
+              <h4>新功能上线</h4>
+              <p>诗词创作工坊现已支持格律自动检查！</p>
+            </div>
+            <div className={styles.updateCard}>
+              <h4>活动预告</h4>
+              <p>下周将举办“中秋诗词大会”，欢迎参与！</p>
+            </div>
+          </div>
+        </div>
+
         <div className={styles.challenge}>
           <h3 className={styles.challengeTitle}>诗词挑战</h3>
           <div className={styles.challengeCard}>

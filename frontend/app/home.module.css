@@ -9,7 +9,7 @@
 
 .hero {
   text-align: center;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.9);
@@ -40,7 +40,7 @@
   color: #555;
   line-height: 1.8;
   margin-bottom: 3rem;
-  max-width: 600px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -76,11 +76,53 @@
   line-height: 1.6;
 }
 
+.popularPoems, .updates {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.poemList, .updateList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.poemCard, .updateCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.poemCard:hover, .updateCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.poemCard h4, .updateCard h4 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.poemCard p, .updateCard p {
+  color: #666;
+  line-height: 1.6;
+}
+
 .actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 3rem 0;
 }
 
 .primaryButton {
@@ -102,66 +144,6 @@
 
 .secondaryButton {
   background: transparent;
-}
-
-.testimonials {
-  margin-top: 3rem;
-  text-align: center;
-}
-
-.testimonialsTitle {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 2rem;
-}
-
-.testimonialCard {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonialCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.userAvatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.userName {
-  font-weight: 600;
-  color: #333;
-}
-
-.testimonialText {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
-.rating {
-  color: #ffc107;
-  font-size: 1.2rem;
-}
-
-.secondaryButton {
   color: #667eea;
   padding: 1rem 2rem;
   border: 2px solid #667eea;
@@ -179,12 +161,12 @@
 }
 
 .challenge {
-  margin-top: 3rem;
+  margin: 3rem 0;
   text-align: center;
 }
 
 .challengeTitle {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: #333;
   margin-bottom: 1rem;
 }
@@ -250,6 +232,63 @@
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
+.testimonials {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.testimonialsTitle {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.testimonialCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.userAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-weight: 600;
+  color: #333;
+}
+
+.testimonialText {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.rating {
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .title {
@@ -264,7 +303,7 @@
     font-size: 1rem;
   }
 
-  .features {
+  .features, .poemList, .updateList {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
@@ -274,8 +313,7 @@
     align-items: center;
   }
 
-  .primaryButton,
-  .secondaryButton {
+  .primaryButton, .secondaryButton {
     width: 100%;
     max-width: 300px;
   }
