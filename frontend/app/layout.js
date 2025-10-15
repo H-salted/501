@@ -1,27 +1,55 @@
+"use client";
+
 import "./globals.css";
 
-export const metadata = {
-  title: "诗光词影 - AI赋能诗词鉴赏平台",
-  description: "基于AI的智能诗词鉴赏与学习平台",
-};
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { supabase } from "./supabase";
 
 export default function RootLayout({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setIsLoggedIn(!!user);
+    };
+    checkAuth();
+  }, []);
+
   return (
     <html lang="zh-CN">
       <body>
         <nav className="navbar">
           <div className="nav-container">
-            <h1 className="nav-title">诗光词影</h1>
+            <h1 className="nav-title">
+              <Link href="/">诗光词影</Link>
+            </h1>
             <div className="nav-links">
-              <a href="/poetry" className="nav-link">
+              <Link
+                href="/poetry"
+                className={`nav-link ${pathname === "/poetry" ? "active" : ""}`}
+              >
                 诗词鉴赏
-              </a>
-              <a href="/learning-records" className="nav-link">
+              </Link>
+              <Link
+                href="/learning-records"
+                className={`nav-link ${
+                  pathname === "/learning-records" ? "active" : ""
+                }`}
+              >
                 学习记录
-              </a>
-              <a href="/user" className="nav-link">
-                个人中心
-              </a>
+              </Link>
+              <Link
+                href="/user"
+                className={`nav-link ${pathname === "/user" ? "active" : ""}`}
+              >
+                {isLoggedIn ? "个人中心" : "登录/注册"}
+              </Link>
             </div>
           </div>
         </nav>
@@ -33,4 +61,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

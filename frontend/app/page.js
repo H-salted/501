@@ -1,7 +1,53 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 import styles from "./home.module.css";
 
 export default function HomePage() {
+  // 临时占位：后续接 Supabase 数据
+  const poems = null;
+
+  // 诗词挑战交互状态与逻辑
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [questions, setQuestions] = useState([
+    {
+      id: 1,
+      question: "床前明月光，疑是地上霜。举头望明月，低头思故乡。",
+      options: ["疑是地上霜", "低头思故乡", "举头望明月", "床前明月光"],
+      answer: "疑是地上霜"
+    },
+    {
+      id: 2,
+      question: "春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。",
+      options: ["处处闻啼鸟", "夜来风雨声", "花落知多少", "春眠不觉晓"],
+      answer: "处处闻啼鸟"
+    }
+  ]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  const handleOptionClick = (option) => {
+    if (!isSubmitted) {
+      setSelectedOption(option);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (selectedOption) {
+      const correctAnswer = questions[currentQuestion].answer;
+      setIsCorrect(selectedOption === correctAnswer);
+      setIsSubmitted(true);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    setSelectedOption(null);
+    setIsCorrect(null);
+    setIsSubmitted(false);
+    setCurrentQuestion((prev) => (prev + 1) % questions.length);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.hero}>
@@ -30,21 +76,19 @@ export default function HomePage() {
         <div className={styles.popularPoems}>
           <h3 className={styles.sectionTitle}>热门诗词</h3>
           <div className={styles.poemList}>
-            <div className={styles.poemCard}>
-              <h4>《静夜思》</h4>
-              <p>床前明月光，疑是地上霜。</p>
-              <p>举头望明月，低头思故乡。</p>
-            </div>
-            <div className={styles.poemCard}>
-              <h4>《登鹳雀楼》</h4>
-              <p>白日依山尽，黄河入海流。</p>
-              <p>欲穷千里目，更上一层楼。</p>
-            </div>
-            <div className={styles.poemCard}>
-              <h4>《春晓》</h4>
-              <p>春眠不觉晓，处处闻啼鸟。</p>
-              <p>夜来风雨声，花落知多少。</p>
-            </div>
+            {poems ? (
+              poems.map((poem) => (
+                <div key={poem.id} className={styles.poemCard}>
+                  <h4>{poem.title}</h4>
+                  <p>{poem.content}</p>
+                </div>
+              ))
+            ) : (
+              <div className={styles.skeletonPoemCard}>
+                <div className={styles.skeletonTitle}></div>
+                <div className={styles.skeletonContent}></div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -65,18 +109,52 @@ export default function HomePage() {
         <div className={styles.challenge}>
           <h3 className={styles.challengeTitle}>诗词挑战</h3>
           <div className={styles.challengeCard}>
-            <p className={styles.challengeQuestion}>“床前明月光”的下一句是什么？</p>
+            <p className={styles.challengeQuestion}>
+              “床前明月光”的下一句是什么？
+            </p>
             <div className={styles.challengeOptions}>
-              <button className={styles.optionButton}>疑是地上霜</button>
-              <button className={styles.optionButton}>举头望明月</button>
-              <button className={styles.optionButton}>低头思故乡</button>
+              <button
+                className={`${styles.optionButton} ${
+                  selectedOption === "疑是地上霜" ? styles.selected : ""
+                }`}
+                onClick={() => handleOptionClick("疑是地上霜")}
+              >
+                疑是地上霜
+              </button>
+              <button
+                className={`${styles.optionButton} ${
+                  selectedOption === "举头望明月" ? styles.selected : ""
+                }`}
+                onClick={() => handleOptionClick("举头望明月")}
+              >
+                举头望明月
+              </button>
+              <button
+                className={`${styles.optionButton} ${
+                  selectedOption === "低头思故乡" ? styles.selected : ""
+                }`}
+                onClick={() => handleOptionClick("低头思故乡")}
+              >
+                低头思故乡
+              </button>
             </div>
-            <button className={styles.submitButton}>提交答案</button>
+            <button className={styles.submitButton} onClick={handleSubmit}>
+              提交答案
+            </button>
+            {isCorrect !== null && (
+              <p
+                className={
+                  isCorrect ? styles.correctFeedback : styles.incorrectFeedback
+                }
+              >
+                {isCorrect ? "回答正确！" : "回答错误，请再试一次！"}
+              </p>
+            )}
           </div>
         </div>
 
         <div className={styles.actions}>
-          <Link href="/poetry" className={styles.primaryButton}>
+          <Link href="/" className={styles.primaryButton}>
             开始鉴赏
           </Link>
           <Link href="/learning-records" className={styles.secondaryButton}>
@@ -88,10 +166,16 @@ export default function HomePage() {
           <h3 className={styles.testimonialsTitle}>用户评价</h3>
           <div className={styles.testimonialCard}>
             <div className={styles.userInfo}>
-              <img src="/user-avatar.png" alt="用户头像" className={styles.userAvatar} />
+              <img
+                src="/user-avatar.svg"
+                alt="用户头像"
+                className={styles.userAvatar}
+              />
               <span className={styles.userName}>张三</span>
             </div>
-            <p className={styles.testimonialText}>这个平台让我对诗词有了全新的理解，非常棒！</p>
+            <p className={styles.testimonialText}>
+              这个平台让我对诗词有了全新的理解，非常棒！
+            </p>
             <div className={styles.rating}>★★★★★</div>
           </div>
         </div>
