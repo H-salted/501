@@ -175,3 +175,41 @@ npm start
 ## 许可证
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+## Supabase 配置
+
+### 步骤 1：创建 Supabase 项目
+
+- 访问 `https://supabase.com` 创建项目
+- 在 Project Settings → API 中获取：
+  - `Project URL`
+  - `anon public key`
+
+### 步骤 2：配置环境变量
+
+在 `frontend/.env.local` 中设置（新建文件）：
+
+```
+NEXT_PUBLIC_SUPABASE_URL=你的Project_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=你的Anon_Public_Key
+```
+
+> 你也可以参考 `frontend/.env.local.example`。
+
+### 步骤 3：安装依赖并启动
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+### 步骤 4：快速测试连接（可选）
+
+在项目根目录运行测试脚本（会读取根 `.env` 或 `frontend/.env.local`）：
+
+```
+node test-supabase.js
+```
+
+脚本将尝试读取 `poems` 表以验证连接（请在 Supabase 中创建相应表或导入 `data/schema.sql`）。
