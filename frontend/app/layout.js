@@ -37,10 +37,8 @@ export default function RootLayout({ children }) {
                 诗词鉴赏
               </Link>
               <Link
-                href="/learning-records"
-                className={`nav-link ${
-                  pathname === "/learning-records" ? "active" : ""
-                }`}
+                href="/study"
+                className={`nav-link ${pathname === "/study" ? "active" : ""}`}
               >
                 学习记录
               </Link>

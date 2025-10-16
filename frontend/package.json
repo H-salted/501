@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3002",
+    "dev": "next dev --port 3003",
     "build": "next build",
     "start": "next start --port 3001",
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.75.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "@supabase/supabase-js": "^2.75.0"
+    "tr46": "^6.0.0",
+    "webidl-conversions": "^8.0.0"
   }
 }
